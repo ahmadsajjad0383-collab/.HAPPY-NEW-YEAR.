@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>New Year</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+
+<style>
+body{
+  margin:0;
+  height:100vh;
+  background: radial-gradient(circle at top,#0f2027,#203a43,#2c5364);
+  color:#fff;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  font-family:'Poppins',sans-serif;
+}
+
+.container{max-width:900px;padding:20px;}
+
+h1{
+  font-family:'Playfair Display',serif;
+  font-size:50px;
+  margin-bottom:20px;
+}
+
+p{font-size:20px;line-height:1.7;}
+
+button{
+  margin-top:30px;
+  padding:14px 40px;
+  font-size:18px;
+  border:none;
+  border-radius:30px;
+  cursor:pointer;
+  background:linear-gradient(45deg,#ffafbd,#ffc3a0);
+  color:#000;
+}
+
+button:hover{transform:scale(1.05);}
+
+.hide{display:none;}
+
+.newyear h1{
+  color:#ffd700;
+  letter-spacing:5px;
+  text-shadow:0 0 15px #ff4da6;
+}
+</style>
+</head>
+
+<body>
+
+<!-- Welcome -->
+<div class="container" id="welcome">
+  <h1>Welcome ✨</h1>
+  <p>Naye saal ka ek chhota sa paighaam…</p>
+  <button onclick="goNext()">Continue 🌙</button>
+</div>
+
+<!-- Before 12 -->
+<div class="container hide" id="main">
+  <p>
+    “Hum se saal bhar me bohot si bhool hui hogi,<br>
+    kuch baaton me kami, kuch lafzon me bhool hui hogi.<br>
+    jo bhi ghalti hui ho hum se,<br>
+    is naye saal se pehle bas maaf kar dena.”
+  </p>
+  <p style="color:#ffdd00;">⏳ Wait for 12:00 AM…</p>
+</div>
+
+<!-- New Year -->
+<div class="container hide newyear" id="newyear">
+  <h1>🎆 HAPPY NEW YEAR 🎆</h1>
+  <p>
+    “Is naye saal me bas itna sa khwab hai,<br>
+    behtar hum ho jaayein, aur gile kam ho jaayein.”
+  </p>
+</div>
+
+<script>
+function goNext(){
+  welcome.classList.add("hide");
+  main.classList.remove("hide");
+}
+
+function checkTime(){
+  const now = new Date();
+  const h = now.getHours();
+  const m = now.getMinutes();
+
+  // 12:00 AM
+  if(h === 0 && m === 0){
+    main.classList.add("hide");
+    newyear.classList.remove("hide");
+  }
+
+  // 1:00 AM → EXPIRED
+  if(h === 1){
+    document.body.innerHTML =
+      "<div style='color:white;text-align:center;font-size:30px;margin-top:40vh;'>⏰ Expired</div>";
+  }
+}
+
+setInterval(checkTime,1000);
+</script>
+
+</body>
+</html>
